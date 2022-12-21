@@ -23,17 +23,17 @@
 - mcopy 所需依赖库
 `brew install mtools`
 
+- 安装bochs模拟工具
+`brew install bochs`
 
 ### 启动命令
 
-- 编译
-`make`
-
 - 运行镜像
-`qemu-system-i386 -fda build/main_floppy.img`
+`make && qemu-system-i386 -fda build/main_floppy.img`
 
 
-
+- 调试
+`bash debug.sh`
 
 
 ### 参考资料
