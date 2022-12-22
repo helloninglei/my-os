@@ -7,6 +7,14 @@ BUILD_DIR=build
 .PHONY: all floppy_image kernel bootloader clean always
 
 
+
+####################################
+# 说明：冒号后面的为依赖项(always表示无任何依赖)，下方的为生成方式
+# floppy_image 依赖--> main_floppy.img 依赖--> bootloader、kernel
+# bootloader 依赖--> bootloader.bin （生成方式：$(ASM) $(SRC_DIR)/bootloader/boot.asm -f bin -o $(BUILD_DIR)/bootloader.bin）
+# kernel 依赖-> kernel.bin (生成方式：$(ASM) $(SRC_DIR)/kernel/main.asm -f bin -o $(BUILD_DIR)/kernel.bin)
+####################################
+
 ####################################
 # Floppy image 
 ####################################
@@ -21,8 +29,10 @@ $(BUILD_DIR)/main_floppy.img: bootloader kernel
 ####################################
 # Bootloader 
 ####################################
+# bootloader依赖 --> bootloader.bin
 bootloader: $(BUILD_DIR)/bootloader.bin
 
+# bootloader.bin 生成方式
 $(BUILD_DIR)/bootloader.bin: always
 	$(ASM) $(SRC_DIR)/bootloader/boot.asm -f bin -o $(BUILD_DIR)/bootloader.bin
 
@@ -30,8 +40,10 @@ $(BUILD_DIR)/bootloader.bin: always
 ####################################
 # Kernel 
 ####################################
+# kernel 依赖 --> kernel.bin
 kernel: $(BUILD_DIR)/kernel.bin
 
+# kernel.bin 生成方式
 $(BUILD_DIR)/kernel.bin: always
 	$(ASM) $(SRC_DIR)/kernel/main.asm -f bin -o $(BUILD_DIR)/kernel.bin
 

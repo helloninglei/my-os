@@ -26,6 +26,12 @@
 - 安装bochs模拟工具
 `brew install bochs`
 
+- 其他工具
+需要安装的工具有：x86_64-elf-gcc、i386-elf-gdb、cmake，安装方式如下：
+`brew install x86_64-elf-gcc`
+`brew install x86_64-elf-gdb`
+`brew install cmake`
+
 ### 启动命令
 
 - 运行镜像
