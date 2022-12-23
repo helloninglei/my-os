@@ -165,41 +165,46 @@ int main(int argc, char **argv)
         return -3;
     }
 
-    // printf("read root directory...\n");
-    // if (!readRootDirectory(disk))
-    // {
-    //     fprintf(stderr, "Could not read root directory!\n");
-    //     free(g_Fat);
-    //     free(g_RootDirectory);
-    //     return -4;
-    // }
-    // DirectoryEntry *fileEntry = findFile(argv[2]);
-    // if (!fileEntry)
-    // {
-    //     fprintf(stderr, "Could not find file %s!\n", argv[2]);
-    //     free(g_Fat);
-    //     free(g_RootDirectory);
-    //     return -5;
-    // }
+    printf("read root directory...\n");
+    if (!readRootDirectory(disk))
+    {
+        fprintf(stderr, "Could not read root directory!\n");
+        free(g_Fat);
+        free(g_RootDirectory);
+        return -4;
+    }
 
-    // uint8_t *buffer = (uint8_t *)malloc(fileEntry->Size + g_BootSector.BytesPerSector);
-    // if (readFile(fileEntry, disk, buffer))
-    // {
-    //     free(buffer);
-    // }
+    printf("find file...\n");
+    DirectoryEntry *fileEntry = findFile(argv[2]);
+    if (!fileEntry)
+    {
+        fprintf(stderr, "Could not find file %s!\n", argv[2]);
+        free(g_Fat);
+        free(g_RootDirectory);
+        return -5;
+    }
 
-    // for (size_t i = 0; i < fileEntry->Size; i++)
-    // {
-    //     if (isprint(buffer[i]))
-    //         fputc(buffer[i], stdout);
-    //     else
-    //         printf("<%02x>", buffer[i]);
-    // }
+    uint8_t *buffer = (uint8_t *)malloc(fileEntry->Size + g_BootSector.BytesPerSector);
+    printf("read file...\n");
+    if (!readFile(fileEntry, disk, buffer))
+    {
+        printf("Could not read file %s.\n", argv[2]);
+        free(g_Fat);
+        free(g_RootDirectory);
+        free(buffer);
+        return -5;
+    }
 
-    // printf("\n");
+    for (size_t i = 0; i < fileEntry->Size; i++)
+    {
+        if (isprint(buffer[i]))
+            fputc(buffer[i], stdout);
+        else
+            printf("<%02x>", buffer[i]);
+    }
 
-    // free(buffer);
+    free(buffer);
     free(g_Fat);
-    // free(g_RootDirectory);
+    free(g_RootDirectory);
     return 0;
 }

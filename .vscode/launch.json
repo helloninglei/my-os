@@ -9,7 +9,9 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/tools/fat",
-            "args": ["build/main_floppy.img", "TEST EX"],
+            "args": ["build/main_floppy.img", "TEST    TXT"],
+            "preLaunchTask": "Build",  // 执行之前处理的任务
+            "postDebugTask": "Clean",  // 执行之后处理的任务
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
