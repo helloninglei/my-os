@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) 启动",
+            "name": "启动fat",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/tools/fat",
@@ -17,7 +17,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb"
-        }
+        },
 
     ]
 }
