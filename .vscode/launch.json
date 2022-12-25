@@ -17,7 +17,6 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb"
-        },
-
+        }
     ]
 }

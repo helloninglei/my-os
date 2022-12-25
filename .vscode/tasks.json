@@ -11,7 +11,7 @@
             "type": "shell",
             "command": "rm -rf ${workspaceFolder}/build",
             "group": "build"
-        },
+        }
     ],
     "version": "2.0.0"
 }
